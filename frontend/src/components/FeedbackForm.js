@@ -16,14 +16,25 @@ function FeedbackForm({ onSubmitSuccess }) {
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error for this field
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  };
+ const handleChange = (e) => {
+  const { name, value } = e.target;
+
+  let newValue = value;
+
+  // Live letters-only validation for studentName
+  if (name === 'studentName') {
+    // Remove any character that is not a letter or space
+    newValue = value.replace(/[^a-zA-Z\s]/g, '');
+  }
+
+  setFormData(prev => ({ ...prev, [name]: newValue }));
+
+  // Clear error for this field
+  if (errors[name]) {
+    setErrors(prev => ({ ...prev, [name]: '' }));
+  }
+};
+
 
   const validate = () => {
     const newErrors = {};
