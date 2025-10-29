@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="App">
       <header className="app-header">
-        <h1>📚 Student Feedback System</h1>
+        <h1>Student Feedback System</h1>
         
       </header>
 
